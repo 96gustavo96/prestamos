@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  App\Models\Cuenta;
 use  App\Models\Cliente;
+use  App\Models\pago;
 use Illuminate\Support\Facades\DB;
 
 class CuentaController extends Controller
@@ -53,7 +54,21 @@ class CuentaController extends Controller
         $cuenta->F_Vencimiento=$request->input('F_Vencimiento');
         $cuenta->Observaciones=$request->input('Observaciones');
         $cuenta->save();
+
+        
+
+        $pago = new pago();
+        $pago->cuenta_id=$request->input('cliente_id');
+        $pago->Monto=$request->input('Cuotas');
+        $pago->F_Pago=$request->input('F_Inicio');
+        $pago->Detalles=$request->input('Observaciones');
+        $pago->Situacion=$request->input('Situacion');
+        $pago->N_Cuota=$request->input('N_Cuota');
+        $pago->save();
+
+
         return redirect()->route('cuentas.index'); 
+
     }
 
     /**
