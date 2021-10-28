@@ -23,10 +23,13 @@ Route::get('/', function () {
 Route::resource('/clientes',ClienteController::class);
 Route::resource('/cuentas', CuentaController::class);
 Route::resource('/pagos', PagoController::class);
+<<<<<<< HEAD
 Route::get('/pagos.edit', function () {
     return 'hola';
 });
 
+=======
+>>>>>>> 27f82ce3321fe752273999e68a6b2ee9ce266b97
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
