@@ -21,7 +21,7 @@ class CuentaController extends Controller
         $cuentas= DB::table('cuentas')
                     ->select('id','cliente_id','Articulo','F_Pago','C_Pagos','Cuotas','F_Inicio','F_Vencimiento','Observaciones')
                     ->where('cliente_id','LIKE','%'.$Busqueda.'%')
-                    ->orderby('id','asc')
+                    ->orderby('id','desc')
                     ->paginate(10);
         return view('cuentas.index',compact('cuentas','Busqueda'));
     }
@@ -55,10 +55,15 @@ class CuentaController extends Controller
         $cuenta->Observaciones=$request->input('Observaciones');
         $cuenta->save();
 
-        
+        $conexion=mysqli_connect('localhost','root','','prestamos');
+
+        $cpagos="SELECT * FROM cuentas order by id desc limit 1";
+        $rpagos=mysqli_query($conexion,$cpagos);
+        $filap = $rpagos ->fetch_assoc();
+        $id_cuenta= $filap['id'];
 
         $pago = new pago();
-        $pago->cuenta_id=$request->input('cliente_id');
+        $pago->cuenta_id=$id_cuenta;
         $pago->Monto=$request->input('Cuotas');
         $pago->F_Pago=$request->input('F_Inicio');
         $pago->Detalles=$request->input('Observaciones');

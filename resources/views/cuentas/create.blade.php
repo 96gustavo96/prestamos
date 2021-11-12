@@ -52,11 +52,9 @@
                                         <input type="text" name="Observaciones" id="Observaciones" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value="" />
                                     </div>
                                     <div class="md:col-span-1">
-                                        <label for="zipcode">Situacion</label>
                                         <input type="hidden" name="Situacion" id="Situacion" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value="Pagado" />
                                     </div>
                                     <div class="md:col-span-1">
-                                        <label for="zipcode">N_Cuota</label>
                                         <input type="hidden" name="N_Cuota" id="N_Cuota" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value="0" />
                                     </div>
 

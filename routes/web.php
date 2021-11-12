@@ -23,14 +23,14 @@ Route::get('/', function () {
 Route::resource('/clientes',ClienteController::class);
 Route::resource('/cuentas', CuentaController::class);
 Route::resource('/pagos', PagoController::class);
-<<<<<<< HEAD
-Route::get('/pagos.edit', function () {
-    return 'hola';
-});
 
-=======
->>>>>>> 27f82ce3321fe752273999e68a6b2ee9ce266b97
+//Route::get('/pagos/mostrar/',['App\Http\Controllers\PagoController','mostrar'])->name ('pagos.pagados');
+Route::get('/pagos/mostrar/{id}', [PagoController::class, 'mostrar']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('dashboard');
 })->name('dashboard');
+/* Route::middleware(['auth:sanctum', 'verified'])->get('/pagos', function () {
+    return view('pagos');
+})->name('dashboard'); */

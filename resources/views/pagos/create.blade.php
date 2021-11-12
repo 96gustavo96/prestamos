@@ -1,84 +1,118 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Nuevo Prestamo') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden  sm:rounded-lg">
-                
-                <form class="w-full max-w-lg" action="{{route('cuentas.store')}}" method="post">
-                    @csrf
-                    <!-- component -->
-                        <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-                            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                                <div class="lg:col-span-2">
-                                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                    <div class="md:col-span-5">
-                                        <label for="full_name">ID Cliente</label>
-                                        <input type="text" name="cliente_id" id="cliente_id" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                    </div>
-
-                                    <div class="md:col-span-5">
-                                        <label for="email">Articulo</label>
-                                        <input type="text" name="Articulo" id="Articulo" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                                    </div>
-
-                                    <div class="md:col-span-3">
-                                        <label for="address"> Forma de Pago</label>
-                                        <input type="text" name="F_Pago" id="F_Pago" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                                    </div>
-                                    <div class="md:col-span-3">
-                                        <label for="address"> Cantidad de Pagos</label>
-                                        <input type="number" name="C_Pagos" id="C_Pagos" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                                    </div>
-
-                                    <div class="md:col-span-2">
-                                        <label for="city">Cuotas</label>
-                                        <input type="number" name="Cuotas" id="Cuotas" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                                    </div>
-                                    <div class="md:col-span-2">
-                                        <label for="city">Fecha de Inicio</label>
-                                        <input type="date" name="F_Inicio" id="F_Inicio" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                                    </div>
-                                    <div class="md:col-span-2">
-                                        <label for="city">Fecha de Vencimiento</label>
-                                        <input type="date" name="F_Vencimiento" id="F_Vencimiento" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                                    </div>
-                                    <div class="md:col-span-1">
-                                        <label for="zipcode">Observaciones</label>
-                                        <input type="text" name="Observaciones" id="Observaciones" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value="" />
-                                    </div>
+<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
 
 
-                                    <div class="md:col-span-5 text-right">
-                                        <div class="inline-flex items-end">
-                                        <button type="submit" value="Guardar" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
-                                        <button type="reset" value="Cancelar" class="bg-transparent-500 hover:bg-transparent-700 text-black font-bold py-2 px-4 rounded">Cancelar</button>
-                                        </div>
-                                    </div>
-
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                </form>
-                    <form action="{{ route('pagos.create') }}" method="POST">
-                    @csrf
-                        <?php 
-                            $count=1;
-                        ;?>
-                             
-                        <button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
-                        <a href="../mostrar.php">mostra</a>
-                    </form>
-            </div>
+<section class="py-1 bg-blueGray-50">
+<div class="w-full xl:w-12/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
+  <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+    <div class="rounded-t mb-0 px-4 py-3 border-0">
+      <div class="flex flex-wrap items-center">
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+          <h3 class="font-semibold text-base text-blueGray-700">Pagina de Listado</h3>
         </div>
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+            <input class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" name="imprimir" value="Imprimir" onclick="window.print();">
+        </div>
+      </div>
     </div>
 
+    <div class="block w-full overflow-x-auto myDivToPrint">
+      <table class="items-center bg-transparent w-full border-collapse ">
+        <thead>
+          <tr>
+            <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          #
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          Cuenta
+                        </th>
+           <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          CLIENTE
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          DNI
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          $
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          FECHA DE PAGO
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          DIRECCION
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          BARRIO
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          LOCALIDAD
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          Estado
+                        </th>
+          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          Nº Cuota
+                        </th>
+          </tr>
+        </thead>
+
+        <tbody>
+        @csrf
+        @if(count($pagos)<=0)
+            <tr>
+                <td colspan="6">No Hay datos</td>
+            </tr>
+        @else
+                                        @foreach($pagos as $pago)
+                                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">                                                
+                                                    <div class="ml-4">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                        {{$pago->id}}
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{$pago->cuenta_id}}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{$pago->Nombre_y_Apellido}}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{$pago->DNI}}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{$pago->Monto}}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {{$pago->F_Pago}}
+                                            <td class="px-6 py-4  text-sm text-gray-500">
+                                                {{$pago->Domicilio}}
+                                            </td>
+                                            <td class="px-6 py-4  text-sm text-gray-500">
+                                                {{$pago->Barrio}}
+                                            </td>
+                                            <td class="px-6 py-4  text-sm text-gray-500">
+                                                {{$pago->Localidad}}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {{$pago->Situacion}}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {{$pago->N_Cuota}}
+                                            </td>
+                                            
+                                        </tr>
+                                        @endforeach
+                                        @endif
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+</section>
 </x-app-layout>
